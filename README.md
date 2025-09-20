@@ -59,16 +59,25 @@ Some of the analytical queries implemented:
    ```bash
    git clone https://github.com/yourusername/google-playstore-sql-analytics.git
 2. **Import dataset into MySQL**  
-   ```sql
-   SOURCE scripts/data.sql;
+   You can choose either of the following options:  
+   - **Option 1 (Full Dataset):** Use the original Kaggle dataset (large file, may take longer to load).
+     ```sql
+     SOURCE Google-Playstore-Analytics/datasets/original-dataset.csv;
+   - **Option 2 (Recommended): Use the optimized batch dataset created from the original file for smoother execution.
+     ```sql
+     SOURCE Google-Playstore-Analytics/datasets/batch-dataset.csv;
 3. **Run analysis queries**  
-
-Open your MySQL client and execute the queries from the `SQL-scripts` folder.  
-You can run them one by one, for example:  
-```sql
-SOURCE Google-Playstore-Analytics/SQL-scripts/query1.sql;
-SOURCE Google-Playstore-Analytics/SQL-scripts/query2.sql;
-SOURCE Google-Playstore-Analytics/SQL-scripts/query3.sql;
+   Open your MySQL client and execute the queries from the `SQL-scripts` folder.  
+   You can run them one by one, for example:  
+   ```sql
+   SOURCE Google-Playstore-Analytics/SQL-scripts/database_schema.sql;
+   SOURCE Google-Playstore-Analytics/SQL-scripts/data_inserts.sql;
+   SOURCE Google-Playstore-Analytics/SQL-scripts/category_avg_price_rating.sql;
+   SOURCE Google-Playstore-Analytics/SQL-scripts/free_vs_paid_apps.sql;
+   SOURCE Google-Playstore-Analytics/SQL-scripts/top_3_apps_per_category.sql;
+   SOURCE Google-Playstore-Analytics/SQL-scripts/suspicious_apps_analysis.sql;
+   SOURCE Google-Playstore-Analytics/SQL-scripts/top_developer_portfolio.sql;
+   SOURCE Google-Playstore-Analytics/SQL-scripts/top_developers_installs.sql
 
 ---
 
