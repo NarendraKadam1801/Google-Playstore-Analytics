@@ -157,18 +157,6 @@ After cleaning and transformation, the normalized tables are:
 
 ---
 
-## 📊 Insights at a Glance
-
-<p align="left">
-  <img src="https://img.shields.io/badge/Top%20Category-Education-blue?style=for-the-badge" alt="Top Category">
-  <img src="https://img.shields.io/badge/Highest%20Rated%20Category-Simulation-green?style=for-the-badge" alt="Highest Rated Category">
-  <img src="https://img.shields.io/badge/Most%20Downloaded%20App-Front%20and%20Back%20Flashlight-orange?style=for-the-badge" alt="Most Downloaded App">
-  <img src="https://img.shields.io/badge/Top%20Developer-EduGorilla%20Testseries%202-purple?style=for-the-badge" alt="Top Developer">
-  <img src="https://img.shields.io/badge/Highest%20Rating%20per%20Install-Packager-red?style=for-the-badge" alt="Highest Rating per Install">
-</p>
-
----
-
 ##  How to Run the Project  
 1. **Clone the repository**  
    ```bash
