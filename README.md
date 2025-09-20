@@ -1,24 +1,26 @@
 # Google Play Store Data Analytics  
 
 ## Project Overview  
-This project provides a **comprehensive SQL-based analysis of 10,000+ Android applications** from the Google Play Store.  
+This project provides a **comprehensive SQL-based analysis of 50,000+ Android applications** from the Google Play Store.  
 The aim was to design a **normalized MySQL database**, perform **data cleaning and transformation**, and execute **advanced SQL queries** to uncover trends in **app popularity, category performance, pricing strategies, and developer behavior**.  
 
 This work demonstrates **end-to-end database management, data analysis, and reporting**—key skills required for real-world data-driven decision making.  
 
 ---
 
-## Objectives  
-- Design and implement a **relational database schema** in MySQL for Play Store apps  
-- Apply **data normalization (3NF)** to ensure integrity and reduce redundancy  
+## Objectives 
+- Downloaded the raw data from Kaggle Dataset 
+- Design and implement a **relational database schema** in MySQL for Play Store apps
+- Imported the data into MySQL raw table
+- Apply **data normalization (3NF)** on raw data to ensure integrity and reduce redundancy  
 - Perform **data cleaning, indexing, and optimization** for query performance  
 - Write **advanced SQL queries** (joins, subqueries, window functions, aggregations) for insights  
-- Build **visual summaries** using Excel/Power BI to communicate findings  
 
 ---
 
 ## Tools & Technologies  
-- **Database:** MySQL  
+- **Database:** MySQL
+- **Tool** MySQL Workbench 
 - **Languages:** SQL (DDL, DML, Joins, Subqueries, Window Functions, Aggregations)  
 - **Version Control:** Git & GitHub  
 
@@ -26,23 +28,107 @@ This work demonstrates **end-to-end database management, data analysis, and repo
 
 ## Database Design  
 
-### **Schema & Tables**
-- **Apps** → AppID, AppName, CategoryID, DeveloperID, Rating, RatingCount, Installs, Price, Size, ReleasedDate, LastUpdated  
-- **Categories** → CategoryID, CategoryName  
-- **Developers** → DeveloperID, DeveloperName, Country  
+### **Database Schema & Tables**
 
-Designed in **Third Normal Form (3NF)** to avoid redundancy and maintain referential integrity.  
+#### **Raw CSV Table**
+The raw dataset from Kaggle is stored in the `raw_csv_data` table as-is before normalization:
+
+- **raw_csv_data**  
+  | Column Name          | Data Type        |
+  |---------------------|----------------|
+  | AppName             | varchar(255)    |
+  | AppID               | varchar(100)    |
+  | Category            | varchar(100)    |
+  | Rating              | varchar(20)     |
+  | RatingCount         | bigint          |
+  | Installs            | varchar(50)     |
+  | MinInstalls         | bigint          |
+  | MaxInstalls         | bigint          |
+  | Free                | varchar(10)     |
+  | Price               | varchar(20)     |
+  | Currency            | varchar(10)     |
+  | Size                | varchar(20)     |
+  | MinAndroid          | varchar(50)     |
+  | DeveloperID         | varchar(255)    |
+  | DeveloperWebsite    | varchar(255)    |
+  | DeveloperEmail      | varchar(255)    |
+  | Released            | varchar(50)     |
+  | LastUpdated         | varchar(50)     |
+  | ContentRating       | varchar(50)     |
+  | PrivacyPolicy       | varchar(255)    |
+  | AdSupported         | varchar(10)     |
+  | InAppPurchases      | varchar(10)     |
+  | EditorsChoice       | varchar(10)     |
+  | ScrapedTime         | varchar(50)     |
+
+---
+
+#### **Normalized Database Tables**
+After cleaning and transformation, the normalized tables are:
+
+- **apps**  
+  | Column Name        | Data Type         | Notes                       |
+  |-------------------|-----------------|-----------------------------|
+  | AppID             | int AI PK        | Auto-increment primary key  |
+  | AppName           | varchar(255)     |                             |
+  | CategoryID        | int              | Foreign key → categories    |
+  | DeveloperID       | int              | Foreign key → developers    |
+  | Rating            | decimal(3,2)     |                             |
+  | RatingCount       | int              |                             |
+  | Installs          | varchar(50)      | Original install string     |
+  | MinInstalls       | int              |                             |
+  | MaxInstalls       | int              |                             |
+  | Free              | tinyint(1)       | 0 = No, 1 = Yes             |
+  | Price             | decimal(6,2)     |                             |
+  | Currency          | varchar(10)      |                             |
+  | Size              | varchar(20)      |                             |
+  | MinAndroid        | varchar(50)      |                             |
+  | Released          | date             |                             |
+  | LastUpdated       | date             |                             |
+  | ContentRating     | varchar(50)      |                             |
+  | PrivacyPolicy     | varchar(255)     |                             |
+  | AdSupported       | tinyint(1)       | 0 = No, 1 = Yes             |
+  | InAppPurchases    | tinyint(1)       | 0 = No, 1 = Yes             |
+  | EditorsChoice     | tinyint(1)       | 0 = No, 1 = Yes             |
+  | ScrapedTime       | datetime         | Timestamp of data scrape    |
+  | PackageName       | varchar(255)     | App package identifier      |
+
+- **categories**  
+  | Column Name    | Data Type      |
+  |---------------|---------------|
+  | CategoryID     | int AI PK      |
+  | CategoryName   | varchar(100)  |
+
+- **developers**  
+  | Column Name       | Data Type      |
+  |------------------|---------------|
+  | DeveloperID       | int AI PK      |
+  | DeveloperName     | varchar(255)  |
+  | DeveloperWebsite  | varchar(255)  |
+  | DeveloperEmail    | varchar(255)  |
+
 
 ---
 
 ## Key SQL Queries  
-Some of the analytical queries implemented:  
-- **Top categories** by average rating and install count  
-- **Free vs. Paid apps distribution** across categories  
-- **Revenue estimation** of paid apps by category  
-- **Most installed apps** overall and by category  
-- **Developers with maximum published apps**  
-- **Correlation analysis** between rating count and installs  
+
+The project implements several analytical queries using MySQL to extract actionable insights from Google Play Store data. The following scripts are included in the `SQL-scripts` folder:
+
+1. **Database Setup & Data Insertion**  
+   - `database_schema.sql` → Creates normalized database tables (`apps`, `categories`, `developers`).  
+   - `data_inserts.sql` → Inserts cleaned and transformed data from CSV/batch files into the tables.  
+
+2. **Category & App Analysis**  
+   - `category_avg_price_rating.sql` → Calculates average price and rating per category.  
+   - `free_vs_paid_apps.sql` → Analyzes distribution of free vs. paid apps across categories.  
+   - `top_3_apps_per_category.sql` → Lists top 3 apps in each category based on rating and installs.  
+   - `suspicious_apps_analysis.sql` → Identifies apps with inconsistent installs or pricing data.  
+
+3. **Developer Analysis**  
+   - `top_developer_portfolio.sql` → Identifies developers with the most published apps.  
+   - `top_developers_installs.sql` → Finds developers whose apps have the highest total installs.  
+
+> **Usage:** Run the scripts in the order listed above to replicate the analysis and insights.
 
 ---
 
@@ -60,12 +146,11 @@ Some of the analytical queries implemented:
    git clone https://github.com/yourusername/google-playstore-sql-analytics.git
 2. **Import dataset into MySQL**  
    You can choose either of the following options:  
-   - **Option 1 (Full Dataset):** Use the original Kaggle dataset (large file, may take longer to load).
-     ```sql
-     SOURCE Google-Playstore-Analytics/datasets/original-dataset.csv;
+   - **Option 1 (Full Dataset):** Use the original Kaggle dataset (large file, may take longer to load).  
+      Download it here: [Google Play Store Apps Dataset on Kaggle](https://www.kaggle.com/datasets/gauthamp10/google-playstore-apps)  
    - **Option 2 (Recommended): Use the optimized batch dataset created from the original file for smoother execution.
      ```sql
-     SOURCE Google-Playstore-Analytics/datasets/batch-dataset.csv;
+     SOURCE Google-Playstore-Analytics/Datasets/batch-dataset.csv;
 3. **Run analysis queries**  
    Open your MySQL client and execute the queries from the `SQL-scripts` folder.  
    You can run them one by one, for example:  
@@ -81,7 +166,8 @@ Some of the analytical queries implemented:
 
 ---
 
-##  License
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 
 This project is licensed under the **MIT License** – you are free to use, modify, and distribute with attribution.
 
@@ -89,7 +175,24 @@ This project is licensed under the **MIT License** – you are free to use, modi
 
 ## Author  
 **Narendra Kadam**  
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nrk19059@gmail.com)  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/narendra-kadam1801/)  
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NarendraKadam1801)  
 
+<p align="left">
+  <a href="mailto:nrk19059@gmail.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Badge">
+  </a>
+  <a href="https://www.linkedin.com/in/narendra-kadam1801/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge">
+  </a>
+  <a href="https://github.com/NarendraKadam1801">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge">
+  </a>
+  <a href="https://www.mysql.com/">
+    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL Badge">
+  </a>
+  <a href="https://www.microsoft.com/en-us/microsoft-365/excel">
+    <img src="https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white" alt="Excel Badge">
+  </a>
+  <a href="https://www.sql.org/">
+    <img src="https://img.shields.io/badge/SQL-005C99?style=for-the-badge&logo=sql&logoColor=white" alt="SQL Badge">
+  </a>
+</p>
