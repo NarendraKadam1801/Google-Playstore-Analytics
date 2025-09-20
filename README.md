@@ -4,14 +4,14 @@
 This project provides a **comprehensive SQL-based analysis of 50,000+ Android applications** from the Google Play Store.  
 The aim was to design a **normalized MySQL database**, perform **data cleaning and transformation**, and execute **advanced SQL queries** to uncover trends in **app popularity, category performance, pricing strategies, and developer behavior**.  
 
-This work demonstrates **end-to-end database management, data analysis, and reporting**—key skills required for real-world data-driven decision making.  
+This work demonstrates **end-to-end database management, data analysis, and reporting**—key skills for real-world data-driven decision making.  
 
 ---
 
 ## Objectives 
-- Downloaded the raw data from Kaggle Dataset 
+- Download the raw data from Kaggle Dataset 
 - Design and implement a **relational database schema** in MySQL for Play Store apps
-- Imported the data into MySQL raw table
+- Import the data into MySQL raw table
 - Apply **data normalization (3NF)** on raw data to ensure integrity and reduce redundancy  
 - Perform **data cleaning, indexing, and optimization** for query performance  
 - Write **advanced SQL queries** (joins, subqueries, window functions, aggregations) for insights  
@@ -20,7 +20,7 @@ This work demonstrates **end-to-end database management, data analysis, and repo
 
 ## Tools & Technologies  
 - **Database:** MySQL
-- **Tool** MySQL Workbench 
+- **Database Client / Tool:** MySQL Workbench  
 - **Languages:** SQL (DDL, DML, Joins, Subqueries, Window Functions, Aggregations)  
 - **Version Control:** Git & GitHub  
 
@@ -107,12 +107,9 @@ After cleaning and transformation, the normalized tables are:
   | DeveloperWebsite  | varchar(255)  |
   | DeveloperEmail    | varchar(255)  |
 
-
 ---
 
 ## Key SQL Queries  
-
-The project implements several analytical queries using MySQL to extract actionable insights from Google Play Store data. The following scripts are included in the `SQL-scripts` folder:
 
 1. **Database Setup & Data Insertion**  
    - `database_schema.sql` → Creates normalized database tables (`apps`, `categories`, `developers`).  
@@ -132,11 +129,43 @@ The project implements several analytical queries using MySQL to extract actiona
 
 ---
 
-## Insights Generated  
-- **Games and Tools** dominate installs but face high competition  
-- **Education and Finance apps** achieve higher trust through consistently strong ratings  
-- **Paid apps adoption is lower**, but niches like Productivity & Health deliver strong revenue potential  
-- **Few developers** control multiple successful apps, while the majority launch only one  
+## Insights
+
+1. **Category Trends**
+   - Highest rated categories: *Simulation (3.35)*, *Casino (3.32)*, *Role Playing (3.18)*.
+   - Lowest rated categories: *Events (1.19)*, *Food & Drink (1.39)*, *Beauty (1.51)*.
+   - Largest app counts: *Education (5496 apps)*, *Entertainment (3059 apps)*, *Tools (3276 apps)*.
+
+2. **Free vs Paid Apps**
+   - Free apps dominate in both number and installs.
+   - Paid apps tend to have slightly higher ratings in *Adventure, Action, Simulation, Personalization*.
+   - Categories like *Music & Audio* and *Productivity* show high installs mostly for free apps.
+
+3. **Top Apps per Category**
+   - Examples: *INDIANA- Lost In The Jungle* (Adventure), *Language Translator free* (Tools), *Unlock any Phone Guide & Methods* (Productivity).  
+
+4. **Suspicious Apps**
+   - High *RatingPerInstall* indicates potential anomalies (5-star rating with <10 installs).  
+
+5. **Developer Insights**
+   - Top developers by portfolio: *EduGorilla Testseries 2*, *New keyboard Theme for Android 2021*, *Free keyboard for Android-2021 theme apps*.
+   - Highest installs do not always correlate with top ratings.
+
+6. **Overall Observation**
+   - High installs and high ratings rarely coincide.
+   - Free apps drive most engagement; paid apps maintain slightly better ratings in selected categories.
+
+---
+
+## 📊 Insights at a Glance
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Top%20Category-Education-blue?style=for-the-badge" alt="Top Category">
+  <img src="https://img.shields.io/badge/Highest%20Rated%20Category-Simulation-green?style=for-the-badge" alt="Highest Rated Category">
+  <img src="https://img.shields.io/badge/Most%20Downloaded%20App-Front%20and%20Back%20Flashlight-orange?style=for-the-badge" alt="Most Downloaded App">
+  <img src="https://img.shields.io/badge/Top%20Developer-EduGorilla%20Testseries%202-purple?style=for-the-badge" alt="Top Developer">
+  <img src="https://img.shields.io/badge/Highest%20Rating%20per%20Install-Packager-red?style=for-the-badge" alt="Highest Rating per Install">
+</p>
 
 ---
 
@@ -144,14 +173,18 @@ The project implements several analytical queries using MySQL to extract actiona
 1. **Clone the repository**  
    ```bash
    git clone https://github.com/yourusername/google-playstore-sql-analytics.git
+   
 2. **Import dataset into MySQL**  
-   You can choose either of the following options:  
+   You can choose either of the following options:
+   
    - **Option 1 (Full Dataset):** Use the original Kaggle dataset (large file, may take longer to load).  
-      Download it here: [Google Play Store Apps Dataset on Kaggle](https://www.kaggle.com/datasets/gauthamp10/google-playstore-apps)  
+      Download it here: [Google Play Store Apps Dataset on Kaggle](https://www.kaggle.com/datasets/gauthamp10/google-playstore-apps)
+     
    - **Option 2 (Recommended): Use the optimized batch dataset created from the original file for smoother execution.
      ```sql
      SOURCE Google-Playstore-Analytics/Datasets/batch-dataset.csv;
-3. **Run analysis queries**  
+     
+4. **Run analysis queries**
    Open your MySQL client and execute the queries from the `SQL-scripts` folder.  
    You can run them one by one, for example:  
    ```sql
@@ -177,22 +210,22 @@ This project is licensed under the **MIT License** – you are free to use, modi
 **Narendra Kadam**  
 
 <p align="left">
-  <a href="mailto:nrk19059@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Badge">
+  <a href="mailto:nrk19059@gmail.com"> 
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Badge"> 
+  </a> 
+  <a href="https://www.linkedin.com/in/narendra-kadam1801/"> 
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"> 
+  </a> 
+  <a href="https://github.com/NarendraKadam1801"> 
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge"> 
   </a>
-  <a href="https://www.linkedin.com/in/narendra-kadam1801/">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge">
+  <a href="https://www.mysql.com/"> 
+    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL Badge"> 
   </a>
-  <a href="https://github.com/NarendraKadam1801">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge">
-  </a>
-  <a href="https://www.mysql.com/">
-    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL Badge">
-  </a>
-  <a href="https://www.microsoft.com/en-us/microsoft-365/excel">
-    <img src="https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white" alt="Excel Badge">
-  </a>
-  <a href="https://www.sql.org/">
-    <img src="https://img.shields.io/badge/SQL-005C99?style=for-the-badge&logo=sql&logoColor=white" alt="SQL Badge">
-  </a>
-</p>
+  <a href="https://www.microsoft.com/en-us/microsoft-365/excel"> 
+    <img src="https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white" alt="Excel Badge"> 
+  </a> 
+  <a href="https://www.sql.org/"> 
+    <img src="https://img.shields.io/badge/SQL-005C99?style=for-the-badge&logo=sql&logoColor=white" alt="SQL Badge"> 
+  </a> 
+</p> ```
