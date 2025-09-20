@@ -58,3 +58,29 @@ Some of the analytical queries implemented:
 1. **Clone the repository**  
    ```bash
    git clone https://github.com/yourusername/google-playstore-sql-analytics.git
+2. **Import dataset into MySQL**  
+   ```sql
+   SOURCE scripts/data.sql;
+3. **Run analysis queries**  
+
+Open your MySQL client and execute the queries from the `SQL-scripts` folder.  
+You can run them one by one, for example:  
+```sql
+SOURCE Google-Playstore-Analytics/SQL-scripts/query1.sql;
+SOURCE Google-Playstore-Analytics/SQL-scripts/query2.sql;
+SOURCE Google-Playstore-Analytics/SQL-scripts/query3.sql;
+
+---
+
+##  License
+
+This project is licensed under the **MIT License** – you are free to use, modify, and distribute with attribution.
+
+---
+
+## Author  
+**Narendra Kadam**  
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:nrk19059@gmail.com)  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/narendra-kadam1801/)  
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NarendraKadam1801)  
+
